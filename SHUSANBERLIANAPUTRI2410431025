@@ -1,0 +1,47 @@
+data_mahasiswa = []
+jumlah_mahasiswa = int(input("Masukan jumlah mahasiswa pratikum AdP :"))
+for i in range(1,jumlah_mahasiswa +1):
+    print("Mahasiswa ke-",i)
+    nama = input("Nama: ")
+    pretest = float(input("Nilai pretest: "))
+    postest = float(input("Nilai postest: "))
+    makalah = float(input("Nilai makalah: "))
+    print(" ")
+    nilai_akhir = 0.4 * pretest + 0.4 * postest + 0.2 * makalah
+    data_mahasiswa.append([nama, nilai_akhir])
+print("Daftar Nilai Akhir Mahasiswa")
+print("|--------------------------------------------|")
+print("| Nama Mahasiswa        |    Nilai Akhir     |")
+print("|--------------------------------------------|")
+for i in data_mahasiswa:
+    nama = i[0]
+    nilai = str(i[1])
+    spasi_nama = 23 - len(nama)
+    spasi_nilai = 20 - len(nilai)
+    print("|" + nama + " " * spasi_nama + "|" + nilai + " " * spasi_nilai + "|")
+print("|--------------------------------------------|")
+print(" ")
+total = 0
+for i in data_mahasiswa:
+    total = total + i[1]
+rata_rata = total / jumlah_mahasiswa
+print("Rata-rata nilai akhir kelas adalah :",rata_rata)
+nilai_tertinggi = data_mahasiswa[0][1]
+nama_tertinggi = data_mahasiswa[0][0]
+nilai_terendah = data_mahasiswa[0][1]
+nama_terendah = data_mahasiswa[0][0]
+for i in data_mahasiswa:
+    if i[1]> nilai_tertinggi:
+        nilai_tertinggi = i[1]
+        nama_tertinggi = i[0]
+    if i[1]< nilai_terendah:
+        nilai_terendah = i[1]
+        nama_terendah = i[0]
+print("Nilai tertinggi mahasiswa adalah:", nilai_tertinggi, "oleh", nama_tertinggi)
+print("Nilai terendah mahasiswa adalah:",nilai_terendah, "oleh", nama_terendah)
+print(" ")
+print("Mahasiswa dengan nilai di atas rata rata adalah:")
+for i in data_mahasiswa:
+    if i[1]> rata_rata:
+        print(i[0], "dengan nilai :", i[1])
+print()
