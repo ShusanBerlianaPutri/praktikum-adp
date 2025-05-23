@@ -1,0 +1,135 @@
+#MATRIKS A:
+print("Masukkan ukuran matriks A: ")
+barisA = int(input("jumlah baris A: "))
+kolomA = int(input("jumlah kolom A: "))
+A = []
+print("masukkan entri-entri matriks A")
+for i in range (barisA):
+    baris = []
+    for j in range(kolomA):
+        entri = int(input(f"entri baris ke{i+1} dan kolom ke{j+1} : "))
+        baris.append(entri)
+    A.append(baris)
+
+#MATRIKS B:
+print("Masukkan ukuran matriks B: ")
+barisB = int(input("jumlah baris B: "))
+kolomB = int(input("jumlah kolom B: "))
+B = []
+print("masukkan entri-entri matriks B")
+for i in range (barisB):
+    baris = []
+    for j in range(kolomB):
+        entri = int(input(f"entri baris ke{i+1} dan kolom ke{j+1} : "))
+        baris.append(entri)
+    B.append(baris)
+lanjut = True
+while lanjut:
+    print("\nMenu Operasi Matriks: ")
+    print("1. Penjumlahan matriks")
+    print("2. pengurangan matriks")
+    print("3. perkalian matriks")
+    print("4. determinan matriks")
+    print("5. invers matriks")
+    print("6. transpose matriks")
+    print("7. keluar dari kalkulator")
+    pilihan =input("pilihan operasi yang anda mau (1-7): ")
+    if pilihan == "1":
+        if barisA == barisB and kolomA == kolomB:
+            print("hasil penjumlahan antara matriks A dan B:")
+            for i in range (barisA):
+                hasil = []
+                for j in range (kolomA):
+                    hasil.append(A[i][j] + B[i][j])
+                print(hasil)
+        else:
+            print("ukuran matriks tidak sama.")
+    elif pilihan == "2":
+        if barisA == barisB and kolomA == kolomB:
+            print("hasil pengurangan antara matriks A dan B:")
+            for i in range (barisA):
+                hasil = []
+                for j in range (kolomA):
+                    hasil.append(A[i][j] - B[i][j])
+                print(hasil)
+        else:
+            print("ukuran matriks tidak sama.")
+    elif pilihan == "3":
+        if kolomA == barisB:
+            print("Hasil perkalian antara matriks A dan B :")
+            for i in range (barisA):
+                hasil = []
+                for j in range (kolomB):
+                    total = 0
+                    for k in range(kolomA):
+                        total += A[i][k] * B[k][j]
+                    hasil.append(total)
+                print(hasil)
+        else :
+            print("matriks  tidak dapat dikalikan karena kolom A tidak sama dengan baris B")
+    elif pilihan == "4":
+        if barisA == kolomA:
+            if barisA == 2:
+                detA = A[0][0]*A[1][1]-A[0][1]*A[1][0]
+                print("determinan matriks A adalah:", detA)
+            elif barisA == 3:
+                detA = A[0][0]*A[1][1]*A[2][2] + A[0][1]*A[1][2]*A[2][0] + A[0][2]*A[1][0]*A[2][1] - A[0][2]*A[1][1]*A[2][0] - A[0][0]*A[1][2]*A[2][1] - A[0][1]*A[1][0]*A[2][2]
+                print("Determinan matriks A adalah:", detA)
+            else:
+                print("determinan hanya bisa didukung oleh matriks 2x2 dan matriks 3x3.")
+        else:
+            print("matriks A bukan persegi.")
+        
+        if barisB == kolomB:
+            if barisB == 2:
+                detB = B[0][0]*B[1][1]-B[0][1]*B[1][0]
+                print("determinan matriks B adalah:", detB)
+            elif barisB == 3:
+                detB = B[0][0]*B[1][1]*B[2][2] + B[0][1]*B[1][2]*B[2][0] + B[0][2]*B[1][0]*B[2][1] - B[0][2]*B[1][1]*B[2][0] - B[0][0]*B[1][2]*B[2][1] - B[0][1]*B[1][0]*B[2][2]
+                print("Determinan matriks B adalah:", detB)
+            else:
+                print("determinan hanya bisa didukung oleh matriks 2x2 dan matriks 3x3.")
+        else:
+            print("matriks B bukan persegi.")
+    elif pilihan == "5":
+        if barisA == 2 and kolomA == 2 and barisB == 2 and kolomB == 2:
+            detA = A[0][0]*A[1][1]-A[0][1]*A[1][0]
+            detB = B[0][0]*B[1][1]-B[0][1]*B[1][0]
+            print(detA)
+            print(detB)
+            if detA != 0:
+                print("invers dari matriks A adalah : ")
+                inversA = [[A[1][1]/detA, - A[0][1]/detA], [-A[1][0]/detA,  A[0][0]/detA]]
+                for row in inversA:
+                    print(row)
+            else:
+                print("matriks A tidak memiliki invers karena determinan 0.")
+            if detB != 0:
+                print("invers dari matriks B adalah : ")
+                inversB = [[B[1][1]/detB, - B[0][1]/detB], [-B[1][0]/detB,  B[0][0]/detB]]
+                for row in inversB:
+                    print(row)
+            else:
+                print("matriks B tidak memiliki invers karena determinan 0.")
+        else:
+            print("invers hanya didukung oleh matriks 2x2 ")
+
+    elif pilihan == "6":
+        print("Transpose Matriks A adalah: ")
+        for i in range (kolomA):
+            baris = []
+            for  j  in range (barisA):
+                baris.append(A[j][i])
+            print(baris)
+        print("Transpose Matriks B adalah: ")
+        for i in range (kolomB):
+            baris = []
+            for  j  in range (barisB):
+                baris.append(B[j][i])
+            print(baris)
+    
+    elif pilihan == "7":
+        print("proggram selesai")
+        lanjut = False
+    else:
+        print("pilihan anda tidak valid")
