@@ -1,0 +1,66 @@
+def input_data():
+    n = int(input("masukkan jumlah mahasiswa: "))
+    data = []
+    for i in range(n):
+        print("Data mahasiswa ke-",i+1)
+        nama = input("Nama: ")
+        nim = input("Nim: ")
+        uts = float(input("nilai UTS: "))
+        uas = float(input("nilai UAS: "))
+        tugas = float(input("nilai Tugas: "))
+        mahasiswa = [nama,nim, uts, uas, tugas]
+        data.append(mahasiswa)
+    return data
+def hitung_nilai_akhir(data):
+    for i in range(len(data)):
+        uts = data[i][2]
+        uas = data[i][3]
+        tugas = data[i][4]
+        nilai_akhir = 0.35*uas + 0.35*uts + 0.30*tugas
+        data[i].append(nilai_akhir)
+    return data
+def hitung_rata(data, indeks):
+    total = 0
+    for i in range(len(data)):
+        total = total + data[i][indeks]
+    rata_rata = total/len(data)
+    return rata_rata
+def urutan_peringkat(data):
+    n = len(data)
+    for i in range(n-1):
+        for j in range(n-i-1):
+            if data[j][5]<data[j+1][5]:
+                sementra = data[j]
+                data[j] = data[j+1]
+                data[j+1] = sementra
+    for i in range(n):
+        data[i].append(i+1)
+    return data
+def tampilkan_data(data):
+    print("|-------------------------------------------------------------------------------------------------------|")
+    print("| NAMA                 | NIM          |  UTS     | UAS      |  TUGAS    | NILAI AKHIR      |  PERINGKAT |")
+    print("|-------------------------------------------------------------------------------------------------------|")
+    for i in range(len(data)):
+        nama = data[i][0]
+        spasi_nama = 22-len(nama)
+        nim = data[i][1]
+        spasi_nim = 14 - len(nim)
+        uts = str(data[i][2])
+        spasi_uts = 10 - len(uts)
+        uas = str(data[i][3])
+        spasi_uas = 10 - len(uas)
+        tugas = str(data[i][4])
+        spasi_tugas = 11 - len(tugas)
+        nilai_akhir = str(data[i][5])
+        spasi_nilai_akhir = 18 - len(nilai_akhir)
+        peringkat = str(data[i][6])
+        spasi_peringkat = 12 - len(peringkat)
+        print("|"+ nama + " "*spasi_nama + "|" + nim +" "*spasi_nim +"|"+ uts + " "*spasi_uts +"|"+ uas + " "*spasi_uas  +"|" + tugas + " "*spasi_tugas +"|" + nilai_akhir + " "*spasi_nilai_akhir +"|" + peringkat + " "*spasi_peringkat + "|")
+    print("|-------------------------------------------------------------------------------------------------------|")
+    print("|RATA-RATA" + " "  *28 +"|"+ str(hitung_rata(data,2))+" "*6 +"|"+ str(hitung_rata(data,3))+" "*6 +"|"+ str(hitung_rata(data,4))+" "*7+"|" + str(hitung_rata(data,5))+" "*25 + "|")
+    print("|-------------------------------------------------------------------------------------------------------|")
+data_mhs = input_data()
+data_mhs = hitung_nilai_akhir(data_mhs)
+data_mhs = urutan_peringkat(data_mhs)
+tampilkan_data(data_mhs)
+
